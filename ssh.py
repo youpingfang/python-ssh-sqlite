@@ -4,8 +4,9 @@ from prettytable import PrettyTable
 
 def connect_to_database():
     # 连接到 SQLite 数据库，如果不存在则创建
-    connection = sqlite3.connect("/root/servers.db")
+    connection = sqlite3.connect("servers.db")
     cursor = connection.cursor()
+
 
     # 创建表格（如果不存在）
     cursor.execute("""
@@ -13,7 +14,7 @@ def connect_to_database():
         id INTEGER PRIMARY KEY,
         key TEXT,
         IP TEXT,
-        port TEXT DEFAULT '22'
+        port INTEGER DEFAULT '22'
     )
     """)
 
@@ -26,8 +27,8 @@ def close_database(connection):
     connection.close()
 
 def add_item():
-    key = input("\n输入要添加的键: ")
-    IPadd = input("输入要添加的值: ")
+    key = input("\n输入要添加的名称: ")
+    IPadd = input("输入要添加的ip: ")
     port = input("输入要添加的端口 (默认值为 22): ")
 
     connection, cursor = connect_to_database()
