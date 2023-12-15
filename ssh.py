@@ -4,9 +4,8 @@ from prettytable import PrettyTable
 
 def connect_to_database():
     # 连接到 SQLite 数据库，如果不存在则创建
-    connection = sqlite3.connect("servers.db")
+    connection = sqlite3.connect("/root/servers.db")
     cursor = connection.cursor()
-
 
     # 创建表格（如果不存在）
     cursor.execute("""
@@ -14,7 +13,7 @@ def connect_to_database():
         id INTEGER PRIMARY KEY,
         key TEXT,
         IP TEXT,
-        port INTEGER DEFAULT '22'
+        port TEXT DEFAULT '22'
     )
     """)
 
@@ -27,8 +26,8 @@ def close_database(connection):
     connection.close()
 
 def add_item():
-    key = input("\n输入要添加的名称: ")
-    IPadd = input("输入要添加的ip: ")
+    key = input("\n输入要添加的键: ")
+    IPadd = input("输入要添加的值: ")
     port = input("输入要添加的端口 (默认值为 22): ")
 
     connection, cursor = connect_to_database()
@@ -59,11 +58,11 @@ def ssh():
 
 def print_menu():
     print("*"*60)
-    print("\n1. 连接服务器")
-    print("2. 添加服务器")
-    print("3. 删除服务器")
-    print("4. 修改服务器")
-    print("5. 查找服务器")
+    print("\na. 连接服务器")
+    print("b. 添加服务器")
+    print("c. 删除服务器")
+    print("d. 修改服务器")
+    print("e. 查找服务器")
     print("q. 退出程序")
     display_dict()
     print("*"*60)
@@ -152,15 +151,15 @@ if __name__ == '__main__':
         print_menu()
         choice = input("\n请选择操作（输入对应数字或 q 退出）: ")
 
-        if choice == "1":
+        if choice == "a":
             ssh()
-        elif choice == "2":
+        elif choice == "b":
             add_item()
-        elif choice == "3":
+        elif choice == "c":
             delete_item()
-        elif choice == "4":
+        elif choice == "d":
             modify_item()
-        elif choice == "5":
+        elif choice == "e":
             search_item()
         elif choice.lower() == "q":
             break
