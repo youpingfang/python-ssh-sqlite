@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 
 def connect_to_database():
     # 连接到 SQLite 数据库，如果不存在则创建
-    connection = sqlite3.connect("/root/servers.db")
+    connection = sqlite3.connect("servers.db")
     cursor = connection.cursor()
 
     # 创建表格（如果不存在）
